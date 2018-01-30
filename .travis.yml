@@ -23,9 +23,10 @@ deploy:
     tags: true
 
 install:
-  - pip install pylint circuitpython-build-tools
+  - pip install pylint circuitpython-build-tools sphinx-build sphinx-rtd-theme
 
 script:
   - pylint adafruit_lsm303.py
   - ([[ ! -d "examples" ]] || pylint --disable=missing-docstring,invalid-name,bad-whitespace examples/*/*.py)
   - circuitpython-build-bundles --filename_prefix adafruit-circuitpython-lsm303 --library_location .
+  - sphinx-build -E -W -b html . _build/html
